@@ -1,58 +1,37 @@
-name: Build
-on: 
-  release:
-    types: [created]
+name: goreleaser
+
+on:
+  push:
+    # run only against tags
+    tags:
+      - '*'
+
+permissions:
+  contents: write
+  # packages: write
+  # issues: write
 
 jobs:
-  release-linux-amd64:
-    name: release linux/amd64
+  goreleaser:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - uses: wangyoucao577/go-release-action@v1.22
-      with:
-        overwrite: true
-        retry: 10
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        goos: linux
-        goarch: amd64
-        extra_files: README.md proxmox-spice-cli.json.example
-  release-windows-amd64:
-    name: release windows/amd64
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - uses: wangyoucao577/go-release-action@v1.22
-      with:
-        overwrite: true
-        retry: 10
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        goos: windows
-        goarch: amd64
-        extra_files: README.md proxmox-spice-cli.json.example
-  release-mac-amd64:
-    name: release mac/amd64
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - uses: wangyoucao577/go-release-action@v1.22
-      with:
-        overwrite: true
-        retry: 10
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        goos: darwin
-        goarch: amd64
-        extra_files: README.md proxmox-spice-cli.json.example
-  release-mac-m1:
-    name: release mac/arm
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - uses: wangyoucao577/go-release-action@v1.22
-      with:
-        overwrite: true
-        retry: 10
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        goos: darwin
-        goarch: arm64
-        extra_files: README.md proxmox-spice-cli.json.example
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - run: git fetch --force --tags
+      - uses: actions/setup-go@v4
+        with:
+          go-version: stable
+      # More assembly might be required: Docker logins, GPG, etc. It all depends
+      # on your needs.
+      - uses: goreleaser/goreleaser-action@v4
+        with:
+          # either 'goreleaser' (default) or 'goreleaser-pro':
+          distribution: goreleaser
+          version: latest
+          args: release --clean
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Your GoReleaser Pro key, if you are using the 'goreleaser-pro'
+          # distribution:
+          # GORELEASER_KEY: ${{ secrets.GORELEASER_KEY }}
