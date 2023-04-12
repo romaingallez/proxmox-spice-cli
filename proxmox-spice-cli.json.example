@@ -1,0 +1,10 @@
+{
+    "host": "",
+    "spice": {
+        "path": "/usr/bin/remote-viewer" 
+    },
+    "login": {
+        "username": "",
+        "password": ""
+    }
+}
