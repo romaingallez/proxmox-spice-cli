@@ -29,7 +29,7 @@ archives:
     - goos: windows
       format: zip
     files:
-      - README.md
+      - README_*.md
       - proxmox-spice-cli.json.example
     wrap_in_directory: true
 
