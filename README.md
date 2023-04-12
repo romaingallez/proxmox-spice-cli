@@ -10,8 +10,8 @@ inspired by https://github.com/Elbandi/proxmox-spice-quickconnect
 Inside the archive from the release you can find an example config or you can use the one in the git repository
 ## Linux
 
-~/proxmox-spice-cli
+`~/proxmox-spice-cli`
 
 ## Windows
 
-C:\Users\$env:USERNAME\proxmox-spice-cli
+`C:\Users\$env:USERNAME\proxmox-spice-cli`
