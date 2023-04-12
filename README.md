@@ -8,7 +8,11 @@ Proxmox SPICE CLI allows users to easily start, stop, and connect to a VM on a P
 
 # Configuration
 
-An example configuration file can be found inside the release archive or in the git repository. Configure the program by placing the configuration file in the following locations:
+An example configuration file can be found inside the release archive or in the git repository. 
+
+Using --config flag you can use an config placed in any folder
+
+Configure the program by placing the configuration file in the following locations:
 
 ## Linux
 
@@ -23,3 +27,9 @@ For Windows, please modify the SPICE path from:
     "path": "/usr/bin/remote-viewer"
 ```
 to the path of the remote-viewer.exe, making sure to escape the slashes like this: `\\`
+
+# Spice
+Activate spice in the vm config in proxmox
+
+On windows do not forget to install the spice guest addon 
+![](docs/spice_windows.png)
