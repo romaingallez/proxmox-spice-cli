@@ -1,17 +1,25 @@
-# proxmox-spice-cli
+# Proxmox SPICE CLI
 
-A small golang program to allow to connect to the an vm in a proxmox server using spice from a cli (linux,windows,mac)
+A compact Golang program that enables connection to a virtual machine (VM) on a Proxmox server using SPICE from the command line interface (CLI) across Linux, Windows, and Mac platforms.
 
-inspired by https://github.com/Elbandi/proxmox-spice-quickconnect
+Inspired by https://github.com/Elbandi/proxmox-spice-quickconnect
 
+Proxmox SPICE CLI allows users to easily start, stop, and connect to a VM on a Proxmox host using the command line interface. The project is written in Golang.
 
-# Config
+# Configuration
 
-Inside the archive from the release you can find an example config or you can use the one in the git repository
+An example configuration file can be found inside the release archive or in the git repository. Configure the program by placing the configuration file in the following locations:
+
 ## Linux
 
-`~/proxmox-spice-cli`
+`~/.proxmox-spice-cli`
 
 ## Windows
 
-`C:\Users\$env:USERNAME\proxmox-spice-cli`
+`C:\Users\$env:USERNAME\.proxmox-spice-cli`
+
+For Windows, please modify the SPICE path from:
+```json
+    "path": "/usr/bin/remote-viewer"
+```
+to the path of the remote-viewer.exe, making sure to escape the slashes like this: `\\`
