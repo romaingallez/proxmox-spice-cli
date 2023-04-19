@@ -46,14 +46,30 @@ func Spice(cmd *cobra.Command, args []string) {
 		config["type"], config["release-cursor"], config["host-subject"], config["password"], config["secure-attention"],
 		config["host"], config["ca"])
 
-	subProcess := exec.Command(viper.GetString("spice.path"), "--debug", "-")
+	// subProcess := exec.Command(viper.GetString("spice.path"), "--debug", "-")
+	subProcess := exec.Command(viper.GetString("spice.path"), "-")
+
 	stdin, err := subProcess.StdinPipe()
 	if err != nil {
 		log.Println(err)
 	}
 	defer stdin.Close()
-	subProcess.Stderr = os.Stderr
-	subProcess.Stdout = os.Stdout
+	devnull, err := cmd.Flags().GetBool("devnull")
+	if err != nil {
+		log.Println(err)
+	}
+	if devnull {
+		devnull, err := os.OpenFile(os.DevNull, os.O_WRONLY, 0755)
+		if err != nil {
+			log.Println(err)
+		}
+
+		subProcess.Stderr = devnull
+		subProcess.Stdout = devnull
+	} else {
+		subProcess.Stderr = os.Stderr
+		subProcess.Stdout = os.Stdout
+	}
 
 	err = subProcess.Start()
 
