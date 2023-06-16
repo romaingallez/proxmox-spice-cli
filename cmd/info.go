@@ -5,7 +5,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+	http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,7 +17,9 @@ package cmd
 
 import (
 	"fmt"
+	"log"
 
+	"github.com/romaingallez/proxmox-spice-cli/internals/info"
 	"github.com/spf13/cobra"
 )
 
@@ -32,12 +34,27 @@ Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("info called")
+		fmt.Println("Please us the subcommand")
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(infoCmd)
+
+	infoCmd.AddCommand(
+		&cobra.Command{
+			Use:   "list",
+			Short: "List all vm from host",
+			Run:   info.List,
+		},
+		&cobra.Command{
+			Use:   "status",
+			Short: "Get the status of a vm",
+			Run: func(cmd *cobra.Command, args []string) {
+				log.Println("Not implemented")
+			},
+		},
+	)
 
 	// Here you will define your flags and configuration settings.
 
