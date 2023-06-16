@@ -35,17 +35,33 @@ var powerCmd = &cobra.Command{
 func init() {
 	rootCmd.AddCommand(powerCmd)
 
-	powerCmd.AddCommand(&cobra.Command{
-		Use:   "on",
-		Short: "Turn on a virtual machine",
-		Run:   power.On,
-	})
+	powerCmd.AddCommand(
+		&cobra.Command{
+			Use:   "on",
+			Short: "Turn on a virtual machine",
+			Run:   power.On,
+		},
+		&cobra.Command{
+			Use:   "off",
+			Short: "Turn off a virtual machine",
+			Run:   power.Off,
+		},
+	)
 
-	powerCmd.AddCommand(&cobra.Command{
-		Use:   "off",
-		Short: "Turn off a virtual machine",
-		Run:   power.Off,
-	})
+	// commands := []*cobra.Command{
+	// 	{
+	// 		Use:   "on",
+	// 		Short: "Turn on a virtual machine",
+	// 		Run:   power.On,
+	// 	},
+	// 	{
+	// 		Use:   "off",
+	// 		Short: "Turn off a virtual machine",
+	// 		Run:   power.Off,
+	// 	},
+	// }
+
+	// powerCmd.AddCommand(commands...)
 
 	// Here you will define your flags and configuration settings.
 
