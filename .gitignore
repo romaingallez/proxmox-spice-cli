@@ -2,5 +2,5 @@
 .env
 .json
 proxmox-spice-cli.json
-
+proxmox-spice-cli
 dist/
