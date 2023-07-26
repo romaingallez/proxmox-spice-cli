@@ -100,7 +100,7 @@ func Spice(cmd *cobra.Command, args []string) {
 
 	go func() {
 		err = subProcess.Wait()
-		fmt.Printf("Command finished with error: %v", err)
+		log.Printf("Command finished with error: %v", err)
 	}()
 
 }
