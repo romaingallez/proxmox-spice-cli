@@ -4,3 +4,4 @@
 proxmox-spice-cli.json
 
 dist/
+tmp/*
